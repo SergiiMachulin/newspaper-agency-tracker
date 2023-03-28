@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Newspaper Agency Tracker Home</h1>
+  <p>Welcome!</p>
+  <h2>Dynamic content</h2>
+  <p>We have:</p>
+  <ul>
+    <li><strong>Newspapers:</strong> {{ num_newspapers }}</li>
+    <li><strong>Publishers:</strong> {{ num_publishers }}</li>
+    <li><strong>Topics:</strong> {{ num_topics }}</li>
+  </ul>
+
+{% endblock %}
