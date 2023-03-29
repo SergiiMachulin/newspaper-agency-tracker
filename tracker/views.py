@@ -31,7 +31,6 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
 
 class TopicDetailView(DetailView):
     model = Topic
-    template_name = "tracker/topic_detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,3 +47,8 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
+
+
+class RedactorListView(LoginRequiredMixin, generic.ListView):
+    model = Redactor
+    paginate_by = 5
