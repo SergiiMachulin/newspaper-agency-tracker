@@ -38,3 +38,9 @@ class TopicDetailView(DetailView):
         topic = self.object
         context["newspapers"] = topic.newspapers.prefetch_related("publishers")
         return context
+
+
+class NewspaperListView(LoginRequiredMixin, generic.ListView):
+    model = Newspaper
+    paginate_by = 5
+    queryset = Newspaper.objects.select_related("topic")
