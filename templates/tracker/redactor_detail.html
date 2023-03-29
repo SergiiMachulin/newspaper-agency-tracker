@@ -4,15 +4,15 @@
 {% block content %}
   <h1>
     Username: {{ redactor.username }}
-    <a href="#" class="btn btn-danger link-to-page float-sm-end">
+    <a href="{% url 'tracker:redactor-delete'  pk=redactor.id%}" class="btn btn-danger link-to-page float-sm-end">
       Delete
     </a>
 
-    <a href="#" class="btn btn-secondary link-to-page">
+    <a href="{% url 'tracker:redactor-update'  pk=redactor.id%}" class="btn btn-secondary link-to-page">
       Edit
     </a>
   </h1>
-
+  <p><em>Email: </em><a href="mailto:{{ redactor.email }}">{{ redactor.email }}</a></p>
   <p><strong>First name:</strong> {{ redactor.first_name }}</p>
   <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
   <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>

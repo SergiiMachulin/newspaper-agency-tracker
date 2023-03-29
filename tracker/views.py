@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import DetailView
 
+from tracker.forms import RedactorCreationForm, RedactorUpdateForm
 from tracker.models import Newspaper, Topic, Redactor
 
 
@@ -76,3 +77,19 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
 class RedactorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Redactor
     queryset = get_user_model().objects.prefetch_related("newspapers__topic")
+
+
+class RedactorCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+
+
+class RedactorUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Redactor
+    form_class = RedactorUpdateForm
+    success_url = reverse_lazy("tracker:redactor-list")
+
+
+class RedactorDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Redactor
+    success_url = reverse_lazy("tracker:redactor-list")
