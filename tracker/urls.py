@@ -3,7 +3,7 @@ from django.urls import path
 
 from .views import (
     index,
-    TopicListView,
+    TopicListView, TopicDetailView,
 )
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
         TopicListView.as_view(),
         name="topic-list",
     ),
+    path("topics/<int:pk>/", TopicDetailView.as_view(), name="topic-detail"),
 ]
 
 app_name = "tracker"

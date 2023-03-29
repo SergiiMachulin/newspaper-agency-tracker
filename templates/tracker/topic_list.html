@@ -14,8 +14,8 @@
     <table class="table table-sm table-hover">
       <thead class="table-dark">
         <tr>
-          <th scope="col">ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Number of newspapers</th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
@@ -24,14 +24,14 @@
       {% for topic in topic_list %}
         <tr>
           <td>
-              {{ topic.id }}
+            <a href="{% url "tracker:topic-detail" pk=topic.id %} ">{{ topic.name }}</a>
           </td>
           <td>
-              {{ topic.name }}
+            {{ topic.newspapers.count }}
           </td>
           <td>
               <a href="#" type="button" class="btn btn-secondary">
-                Update
+                Rename
               </a>
             </td>
             <td>

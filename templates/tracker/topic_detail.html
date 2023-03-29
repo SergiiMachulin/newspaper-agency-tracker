@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  <p>Topic ID: {{ object.id }}</p>
+  {% for newspaper in newspapers %}
+    <h3>All newspapers of this topic</h3>
+  <ul>
+    <li>
+        {{ newspaper.title }} (edited {{ newspaper.published_date|date:"F j, Y" }}
+        by {{ newspaper.publishers.first }}
+        {% if newspaper.publishers.count > 1 %} and others{% endif %})
+    </li>
+  </ul>
+  {% empty %}
+      <h6>No newspapers found for this topic.</h6>
+    {% endfor %}
+{% endblock %}

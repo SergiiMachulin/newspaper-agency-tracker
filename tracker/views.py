@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
+from django.views.generic import DetailView
 
 from tracker.models import Newspaper, Topic, Redactor
 
@@ -26,3 +27,14 @@ def index(request):
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     paginate_by = 5
+
+
+class TopicDetailView(DetailView):
+    model = Topic
+    template_name = "tracker/topic_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        topic = self.object
+        context["newspapers"] = topic.newspapers.prefetch_related("publishers")
+        return context
