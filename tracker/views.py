@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,6 +9,7 @@ from django.views.generic import DetailView
 from tracker.models import Newspaper, Topic, Redactor
 
 
+@login_required
 def index(request):
     """View function for the home page of the site."""
 
@@ -29,7 +31,7 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
 
-class TopicDetailView(DetailView):
+class TopicDetailView(LoginRequiredMixin, DetailView):
     model = Topic
 
     def get_context_data(self, **kwargs):
