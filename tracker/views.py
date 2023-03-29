@@ -1,7 +1,10 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 
-from tracker.models import Newspaper, Topic
+from tracker.models import Newspaper, Topic, Redactor
 
 
 def index(request):
@@ -18,3 +21,7 @@ def index(request):
     }
 
     return render(request, "tracker/index.html", context=context)
+
+
+class TopicListView(LoginRequiredMixin, generic.ListView):
+    model = Topic
