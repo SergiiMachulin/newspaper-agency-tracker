@@ -41,6 +41,23 @@ class TopicDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+class TopicCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("tracker:topic-list")
+
+
+class TopicUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("tracker:topic-list")
+
+
+class TopicDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Topic
+    success_url = reverse_lazy("tracker:topic-list")
+
+
 class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 5

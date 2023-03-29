@@ -5,7 +5,7 @@
 {% block content %}
   <h1>
     Topic List
-    <a href="#" class="btn btn-primary link-to-page float-sm-end">
+    <a href="{% url 'tracker:topic-create' %}" class="btn btn-primary link-to-page float-sm-end">
       Add new topic
     </a>
   </h1>
@@ -30,12 +30,12 @@
             {{ topic.newspapers.count }}
           </td>
           <td>
-              <a href="#" type="button" class="btn btn-secondary">
+              <a href="{% url 'tracker:topic-update' pk=topic.id %}" type="button" class="btn btn-secondary">
                 Rename
               </a>
             </td>
             <td>
-              <a href="#" type="button" class="btn btn-danger">
+              <a href="{% url 'tracker:topic-delete' pk=topic.id %}"  type="button" class="btn btn-danger">
                 Delete
               </a>
             </td>
