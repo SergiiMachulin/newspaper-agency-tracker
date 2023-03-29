@@ -2,14 +2,17 @@
 
 {% block title %}<title>{{ newspaper.title }}</title>{% endblock %}
 {% block content %}
-  <p>{{ newspaper.topic }}</p>
+  <p><a href="{{ newspaper.topic.get_absolute_url }}">{{ newspaper.topic }}</a></p>
   <h1 class="display-4 fst-italic">
     {{ newspaper.title }}
   </h1>
   <p><h3 class="mb-0">{{ newspaper.content }}</h3></p>
   <p>
     <em>
-      Edited {{ newspaper.published_date }} by <a href="#">{{ newspaper.publishers.first.username }}</a>
+      Edited {{ newspaper.published_date }} by
+      <a href={{ newspaper.publishers.first.get_absolute_url }}>
+        {{ newspaper.publishers.first.username }}
+      </a>
         {% if newspaper.publishers.count > 1 %} and others{% endif %}
     </em>
   </p>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Editor</title>{% endblock %}
+{% block content %}
+  <h1>
+    Username: {{ redactor.username }}
+    <a href="#" class="btn btn-danger link-to-page float-sm-end">
+      Delete
+    </a>
+
+    <a href="#" class="btn btn-secondary link-to-page">
+      Edit
+    </a>
+  </h1>
+
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+  <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+  <div class="ml-3">
+    <h4>Editing newspapers</h4>
+
+    {% for newspaper in redactor.newspapers.all %}
+        <hr>
+        <p><strong>Title:</strong> {{ newspaper.title }}</p>
+        <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
+        <p><strong>Article:</strong> {{ newspaper.content }}</p>
+        <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
+
+    {% empty %}
+      <p>No editing newspapers!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

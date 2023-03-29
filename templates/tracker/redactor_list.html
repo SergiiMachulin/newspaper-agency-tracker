@@ -21,7 +21,7 @@
       </thead>
     {% for redactor in redactor_list %}
       <tr>
-        <td><a href="#">{{ redactor.username }}</a></td>
+        <td><a href={{ redactor.get_absolute_url }}>{{ redactor.username }}</a></td>
         <td>{{ redactor.first_name }}</td>
         <td>{{ redactor.last_name }}</td>
         <td>{{ redactor.years_of_experience }}</td>
