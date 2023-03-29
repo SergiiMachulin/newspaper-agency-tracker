@@ -18,10 +18,10 @@
   </p>
   <br>
   <div class="float-left">
-    <a href="#" class="btn btn-danger link-to-page">
+    <a href="{% url 'tracker:newspaper-delete' pk=newspaper.id%}" class="btn btn-danger link-to-page">
       Delete
     </a>
-    <a href="#" class="btn btn-secondary link-to-page">
+    <a href="{% url 'tracker:newspaper-update' pk=newspaper.id%}" class="btn btn-secondary link-to-page">
       Update
     </a>
   </div>

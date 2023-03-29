@@ -4,8 +4,10 @@
 {% block content %}
   <h1>{{ object.name }}</h1>
   <p>Topic ID: {{ object.id }}</p>
-  {% for newspaper in newspapers %}
+  {% if newspapers %}
     <h3>All newspapers of this topic</h3>
+  {% endif %}
+  {% for newspaper in newspapers %}
   <ul>
     <li>
         {{ newspaper.title }} (edited {{ newspaper.published_date|date:"F j, Y" }}

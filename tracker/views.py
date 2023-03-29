@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import DetailView
 
-from tracker.forms import RedactorCreationForm, RedactorUpdateForm
+from tracker.forms import RedactorCreationForm, RedactorUpdateForm, NewspaperForm
 from tracker.models import Newspaper, Topic, Redactor
 
 
@@ -67,6 +67,23 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
 
 class NewspaperDetailView(LoginRequiredMixin, generic.DetailView):
     model = Newspaper
+
+
+class NewspaperCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("tracker:newspaper-list")
+
+
+class NewspaperUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("tracker:newspaper-list")
+
+
+class NewspaperDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Newspaper
+    success_url = reverse_lazy("tracker:newspaper-list")
 
 
 class RedactorListView(LoginRequiredMixin, generic.ListView):
