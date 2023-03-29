@@ -13,7 +13,7 @@
     <ul>
       {% for newspaper in newspaper_list %}
         <li>
-          <a href="#">{{ newspaper.id }}</a>
+          <a href="{% url 'tracker:newspaper-detail' pk=newspaper.id%}">{{ newspaper.id }}</a>
           {{ newspaper.title }} ({{ newspaper.topic.name }})
         </li>
       {% endfor %}
