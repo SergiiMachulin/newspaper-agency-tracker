@@ -25,3 +25,4 @@ def index(request):
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
+    paginate_by = 5
