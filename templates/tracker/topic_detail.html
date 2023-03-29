@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% block title %}<title>{{ object.name }}</title>{% endblock %}
 {% block content %}
   <h1>{{ object.name }}</h1>
   <p>Topic ID: {{ object.id }}</p>
