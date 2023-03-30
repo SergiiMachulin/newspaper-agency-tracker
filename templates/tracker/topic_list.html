@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 
 {% block title %}<title>Topics</title>{% endblock %}
 
@@ -9,6 +10,10 @@
       Add new topic
     </a>
   </h1>
+
+  <form action="" method="get" class="form-check-inline">
+      {{ search_form|crispy }}
+  </form>
 
   {% if topic_list %}
     <table class="table table-sm table-hover">
