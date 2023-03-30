@@ -29,6 +29,7 @@ def index(request):
 
 class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
+    queryset = Topic.objects.prefetch_related("newspapers").all()
     paginate_by = 5
 
 
