@@ -19,8 +19,9 @@
     <table class="table table-sm table-hover">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Name</th>
+          <th scope="col" class="title">Name</th>
           <th scope="col">Number of newspapers</th>
+          <th scope="col">Number of editors specialized in topic</th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
@@ -28,22 +29,25 @@
 
       {% for topic in topic_list %}
         <tr>
-          <td>
+          <td class="title">
             <a href="{% url "tracker:topic-detail" pk=topic.id %} ">{{ topic.name }}</a>
           </td>
           <td>
             {{ topic.newspapers.count }}
           </td>
           <td>
-              <a href="{% url 'tracker:topic-update' pk=topic.id %}" type="button" class="btn btn-secondary">
-                Rename
-              </a>
-            </td>
-            <td>
-              <a href="{% url 'tracker:topic-delete' pk=topic.id %}"  type="button" class="btn btn-danger">
-                Delete
-              </a>
-            </td>
+            {{ topic.num_editors_specialized }}
+          </td>
+          <td>
+            <a href="{% url 'tracker:topic-update' pk=topic.id %}" type="button" class="btn btn-secondary">
+              Rename
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'tracker:topic-delete' pk=topic.id %}"  type="button" class="btn btn-danger">
+              Delete
+            </a>
+          </td>
         </tr>
       {% endfor %}
     </table>

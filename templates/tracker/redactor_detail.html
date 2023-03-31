@@ -23,13 +23,13 @@
 
     {% for newspaper in redactor.newspapers.all %}
         <hr>
-        <p><strong>Title:</strong> {{ newspaper.title }}</p>
+      <p><strong>Title:</strong><a href="{% url 'tracker:newspaper-detail' pk=newspaper.id%}"> {{ newspaper.title }} </a></p>
         <p><strong>Topic:</strong> {{ newspaper.topic.name }}</p>
         <p><strong>Article:</strong> {{ newspaper.content }}</p>
         <p class="text-muted"><strong>Id:</strong> {{newspaper.id}}</p>
 
     {% empty %}
-      <p>No editing newspapers!</p>
+      <p>Not too busy at this moment)</p>
     {% endfor %}
   </div>
 {% endblock %}

@@ -17,15 +17,16 @@ class Topic(models.Model):
     def get_absolute_url(self):
         return reverse("tracker:topic-detail", kwargs={"pk": self.pk})
 
+    def num_editors_specialized(self):
+        return Redactor.objects.filter(newspapers__topic=self).count()
+
 
 class Redactor(AbstractUser):
     MIN_YEARS = 0
     MAX_YEARS = 60
     years_of_experience = models.IntegerField(
-        validators=(
-            MinValueValidator(MIN_YEARS),
-            MaxValueValidator(MAX_YEARS)
-        ), null=True,
+        validators=(MinValueValidator(MIN_YEARS), MaxValueValidator(MAX_YEARS)),
+        null=True,
     )
 
     class Meta:

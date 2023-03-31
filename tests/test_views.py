@@ -5,15 +5,8 @@ from django.urls import reverse
 from tracker.models import Topic, Newspaper
 
 TOPIC_URL = reverse("tracker:topic-list")
-TOPIC_URL_SEARCHING_BY_NAME = reverse(
-    "tracker:topic-list"
-) + "?name=B"
 NEWSPAPER_URL = reverse("tracker:newspaper-list")
-NEWSPAPER_URL_SEARCHING_BY_TITLE = reverse("tracker:newspaper-list") + "?title=B"
 REDACTOR_URL = reverse("tracker:redactor-list")
-REDACTOR_URL_SEARCHING_BY_USERNAME = reverse(
-    "tracker:redactor-list"
-) + "?username=ma"
 
 
 class PublicTopicTests(TestCase):
@@ -49,7 +42,7 @@ class PrivateTopicTests(TestCase):
         topics = list(Topic.objects.filter(
             name__icontains="B"
         ))
-        response = self.client.get(TOPIC_URL_SEARCHING_BY_NAME)
+        response = self.client.get(TOPIC_URL, {"name": "B"})
 
         self.assertEqual(
             list(response.context["topic_list"]),
@@ -94,7 +87,7 @@ class PrivateCarTests(TestCase):
         newspapers = list(Newspaper.objects.filter(
             title__icontains="B"
         ))
-        response = self.client.get(NEWSPAPER_URL_SEARCHING_BY_TITLE)
+        response = self.client.get(NEWSPAPER_URL, {"title": "B"})
 
         self.assertEqual(
             list(response.context["newspaper_list"]),
@@ -149,7 +142,7 @@ class PrivateRedactorTests(TestCase):
         redactors = list(get_user_model().objects.filter(
             username__icontains="ma"
         ))
-        response = self.client.get(REDACTOR_URL_SEARCHING_BY_USERNAME)
+        response = self.client.get(REDACTOR_URL, {"username": "ma"})
 
         self.assertEqual(
             list(response.context["redactor_list"]),

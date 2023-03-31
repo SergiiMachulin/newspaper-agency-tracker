@@ -7,10 +7,12 @@
 
   <div class="row mb-4">
     <div class="col">
-      <h1>Newspaper list</h1>
-    </div>
-    <div class="col-auto">
-      <a href="{% url 'tracker:newspaper-create' %}" class="btn btn-primary">Create</a>
+      <h1>
+        Newspaper list
+        <a href="{% url 'tracker:newspaper-create' %}" class="btn btn-primary link-to-page float-sm-end">
+          Create
+        </a>
+      </h1>
     </div>
   </div>
   <div class="row mb-4">
@@ -35,7 +37,7 @@
             <div class="col-auto d-none d-lg-block">
               <a href="{% url 'tracker:newspaper-detail' pk=newspaper.id %}">
                 {% load static %}
-                <img src="{% static 'newspaper.png' %}" alt="My image" width="250" height="220">
+                <img src="{% static 'newspaper.png' %}" alt="My image" width="220" height="190">
               </a>
             </div>
           </div>
