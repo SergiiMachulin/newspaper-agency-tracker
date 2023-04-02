@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}<title>{{ object.name }}</title>{% endblock %}
+{% block content %}
+  <h1>{{ object.name }}</h1>
+  <p>Topic ID: {{ object.id }}</p>
+  {% if newspapers %}
+    <h3>All newspapers of this topic</h3>
+  {% endif %}
+  {% for newspaper in newspapers %}
+  <ul>
+    <li>
+        <a href="{% url 'tracker:newspaper-detail' pk=newspaper.id%}">{{ newspaper.title }}</a>
+    </li>
+  </ul>
+  {% empty %}
+      <p>No newspapers found for this topic.</p>
+    {% endfor %}
+  {% if newspapers %}
+      <h3>All editors specialized in this topic</h3>
+  {% endif %}
+  {% for newspaper in newspapers %}
+  <ul>
+    {% for publisher in newspaper.publishers.all %}
+    <li>
+        <a href="{{ publisher.get_absolute_url }}">
+          {{ publisher.first_name }} {{ publisher.last_name }}
+        </a>
+      {% endfor %}
+
+    </li>
+  </ul>
+  {% empty %}
+      <p>No editors specialized in this topic.</p>
+    <hr>
+    <h6><em>Are you interested?</em></h6>
+    <div class="col-auto">
+      <a href="{% url 'tracker:newspaper-create' %}" class="btn btn-primary">Try yourself as an editor</a>
+    </div>
+    {% endfor %}
+{% endblock %}
