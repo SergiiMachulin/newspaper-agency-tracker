@@ -43,7 +43,7 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-ALLOWED_HOSTS = ["127.0.0.1", ]
+ALLOWED_HOSTS = ["127.0.0.1", "newspaper-agency-tracker.onrender.com"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
