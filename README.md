@@ -5,10 +5,10 @@
 Project for managing the publishing process of a newspaper agency by tracking the work of editors assigned to newspapers published by the agency
 
 ## Check it out 
-[Newspaper agency tracker project deployed to Render](POST_LINK_HERE)
+[Newspaper agency tracker project deployed to Render](https://newspaper-agency-tracker.onrender.com/)
 
 - **_login_**: user
-- **_password_**: user12345
+- **_password_**: u$er@123
 
 ## Installation
 Python3 must be already installed
