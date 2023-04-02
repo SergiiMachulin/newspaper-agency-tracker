@@ -7,6 +7,9 @@ Project for managing the publishing process of a newspaper agency by tracking th
 ## Check it out 
 [Newspaper agency tracker project deployed to Render](POST_LINK_HERE)
 
+- **_login_**: user
+- **_password_**: user12345
+
 ## Installation
 Python3 must be already installed
 
