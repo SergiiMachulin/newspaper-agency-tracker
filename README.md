@@ -20,8 +20,16 @@ python -m venv venv
 source venv/bin/activate (on Linux/maOS)
 venv\Scripts\activate (on Windows)
 pip install -r requirements.txt
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver 
 ```
+For deployment next environment variables to store API keys and other configuration values and secrets were used:
+- DATABASE_URL
+- DJANGO_DEBUG
+- DJANGO_SECRET_KEY
+- PYTHON_VERSION
+- WEB_CONCURRENCY
 
 ## Features
 * Authentication functionality for Editor/User
