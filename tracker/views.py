@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -46,10 +47,15 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Topic.objects.prefetch_related("newspapers")
+        queryset = Topic.objects.prefetch_related("newspapers").annotate(
+            num_editors_specialized=Count(
+                "newspapers__publishers", distinct=True
+            )
+        ).order_by("name")
         form = TopicSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(name__icontains=form.cleaned_data["name"])
+
         return queryset
 
 
