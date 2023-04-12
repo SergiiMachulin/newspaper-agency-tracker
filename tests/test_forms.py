@@ -1,10 +1,9 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
-from tracker.forms import RedactorCreationForm, RedactorUpdateForm
+from tracker.forms import RedactorCreationForm
 
 
 class RedactorCreationFormTest(TestCase):
-    def test_redactor_creation_valid_form(self):
+    def test_redactor_creation_valid_form(self) -> None:
         form_data = {
             "username": "testuser",
             "password1": "testpass123",
@@ -18,7 +17,7 @@ class RedactorCreationFormTest(TestCase):
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data, form_data)
 
-    def test_redactor_creation_invalid_form(self):
+    def test_redactor_creation_invalid_form(self) -> None:
         form_data = {
             "username": "testuser",
             "password1": "testpass123",

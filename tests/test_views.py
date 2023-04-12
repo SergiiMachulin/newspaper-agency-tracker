@@ -10,7 +10,7 @@ REDACTOR_URL = reverse("tracker:redactor-list")
 
 
 class PublicTopicTests(TestCase):
-    def test_login_required(self):
+    def test_login_required(self) -> None:
         response = self.client.get(TOPIC_URL)
         self.assertNotEqual(response.status_code, 200)
 
@@ -26,7 +26,7 @@ class PrivateTopicTests(TestCase):
         )
         self.client.force_login(self.user)
 
-    def test_retrieve_topics(self):
+    def test_retrieve_topics(self) -> None:
         Topic.objects.create(name="Test")
         Topic.objects.create(name="Best")
         response = self.client.get(TOPIC_URL)
@@ -38,7 +38,7 @@ class PrivateTopicTests(TestCase):
         )
         self.assertTemplateUsed(response, "tracker/topic_list.html")
 
-    def test_retrieve_topics_after_searching_by_name(self):
+    def test_retrieve_topics_after_searching_by_name(self) -> None:
         topics = list(Topic.objects.filter(
             name__icontains="B"
         ))
@@ -52,7 +52,7 @@ class PrivateTopicTests(TestCase):
 
 
 class PublicNewspaperTests(TestCase):
-    def test_login_required(self):
+    def test_login_required(self) -> None:
         response = self.client.get(NEWSPAPER_URL)
         self.assertNotEqual(response.status_code, 200)
 
@@ -71,7 +71,7 @@ class PrivateCarTests(TestCase):
         )
         self.client.force_login(self.user)
 
-    def test_retrieve_newspapers(self):
+    def test_retrieve_newspapers(self) -> None:
         Newspaper.objects.create(title="Testing", topic=self.topic)
         Newspaper.objects.create(title="Besting", topic=self.topic)
         response = self.client.get(NEWSPAPER_URL)
@@ -97,7 +97,7 @@ class PrivateCarTests(TestCase):
 
 
 class PublicRedactorTests(TestCase):
-    def test_login_required(self):
+    def test_login_required(self) -> None:
         response = self.client.get(REDACTOR_URL)
         self.assertNotEqual(response.status_code, 200)
 
@@ -128,7 +128,7 @@ class PrivateRedactorTests(TestCase):
 
         self.client.force_login(self.user)
 
-    def test_retrieve_redactors(self):
+    def test_retrieve_redactors(self) -> None:
         redactors = list(get_user_model().objects.all())
         response = self.client.get(REDACTOR_URL)
         self.assertEqual(response.status_code, 200)
@@ -138,7 +138,7 @@ class PrivateRedactorTests(TestCase):
         )
         self.assertTemplateUsed(response, "tracker/redactor_list.html")
 
-    def test_retrieve_redactors_after_searching_by_username(self):
+    def test_retrieve_redactors_after_searching_by_username(self) -> None:
         redactors = list(get_user_model().objects.filter(
             username__icontains="ma"
         ))

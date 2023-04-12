@@ -1,7 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count
+from django.db.models import Count, QuerySet
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -19,7 +20,7 @@ from tracker.models import Newspaper, Topic, Redactor
 
 
 @login_required
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     """View function for the home page of the site."""
 
     num_publishers = get_user_model().objects.count()
@@ -39,14 +40,14 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
     model = Topic
     paginate_by = 5
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(TopicListView, self).get_context_data(**kwargs)
         name = self.request.GET.get("name", "")
 
         context["search_form"] = TopicSearchForm(initial={"name": name})
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Topic.objects.prefetch_related("newspapers").annotate(
             num_editors_specialized=Count(
                 "newspapers__publishers", distinct=True
@@ -62,7 +63,7 @@ class TopicListView(LoginRequiredMixin, generic.ListView):
 class TopicDetailView(LoginRequiredMixin, DetailView):
     model = Topic
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
         context = super().get_context_data(**kwargs)
         topic = self.object
         context["newspapers"] = topic.newspapers.prefetch_related("publishers")
@@ -90,14 +91,14 @@ class NewspaperListView(LoginRequiredMixin, generic.ListView):
     model = Newspaper
     paginate_by = 4
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(NewspaperListView, self).get_context_data(**kwargs)
         title = self.request.GET.get("title", "")
         context["search_form"] = NewspaperSearchForm(initial={"title": title})
 
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = Newspaper.objects.select_related("topic")
         form = NewspaperSearchForm(self.request.GET)
         if form.is_valid():
@@ -131,18 +132,22 @@ class RedactorListView(LoginRequiredMixin, generic.ListView):
     model = Redactor
     paginate_by = 5
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
         context = super(RedactorListView, self).get_context_data(**kwargs)
         username = self.request.GET.get("username", "")
-        context["search_form"] = RedactorSearchForm(initial={"username": username})
+        context["search_form"] = RedactorSearchForm(
+            initial={"username": username}
+        )
 
         return context
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
         queryset = get_user_model().objects.all()
         form = RedactorSearchForm(self.request.GET)
         if form.is_valid():
-            return queryset.filter(username__icontains=form.cleaned_data["username"])
+            return queryset.filter(
+                username__icontains=form.cleaned_data["username"]
+            )
 
         return queryset
 

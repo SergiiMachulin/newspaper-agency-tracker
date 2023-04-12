@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 
 class ModelsTests(TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.redactor = get_user_model().objects.create_user(
             username="super.user",
             password="!@#456Qw",
@@ -12,6 +12,6 @@ class ModelsTests(TestCase):
             years_of_experience=0,
         )
 
-    def test_redactor_get_absolute_url(self):
+    def test_redactor_get_absolute_url(self) -> None:
         redactor = self.redactor
         self.assertEqual(redactor.get_absolute_url(), "/redactors/1/")

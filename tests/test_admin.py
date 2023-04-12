@@ -40,17 +40,17 @@ class AdminSiteTests(TestCase):
         )
         self.newspaper2.publishers.set([self.redactor])
 
-    def test_redactor_years_of_experience_listed(self):
+    def test_redactor_years_of_experience_listed(self) -> None:
         url = reverse("admin:tracker_redactor_changelist")
         response = self.client.get(url)
         self.assertContains(response, self.redactor.years_of_experience)
 
-    def test_redactor_detailed_years_of_experience_listed(self):
+    def test_redactor_detailed_years_of_experience_listed(self) -> None:
         url = reverse("admin:tracker_redactor_change", args=[self.redactor.id])
         response = self.client.get(url)
         self.assertContains(response, self.redactor.years_of_experience)
 
-    def test_redactor_add_fieldsets(self):
+    def test_redactor_add_fieldsets(self) -> None:
         url = reverse("admin:tracker_redactor_add")
         data = {
             "username": "newredactor",
@@ -71,14 +71,14 @@ class AdminSiteTests(TestCase):
         self.assertEqual(new_driver.last_name, "Redactor")
         self.assertEqual(new_driver.years_of_experience, 5)
 
-    def test_newspaper_search(self):
+    def test_newspaper_search(self) -> None:
         url = reverse("admin:tracker_newspaper_changelist")
         response = self.client.get(url, {"q": "Best"})
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Best")
         self.assertNotContains(response, "Testing")
 
-    def test_newspaper_filter_by_topic(self):
+    def test_newspaper_filter_by_topic(self) -> None:
         url = reverse("admin:tracker_newspaper_changelist")
         response = self.client.get(
             url,

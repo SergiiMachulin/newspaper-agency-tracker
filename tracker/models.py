@@ -11,13 +11,13 @@ class Topic(models.Model):
     class Meta:
         ordering = ["name"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("tracker:topic-detail", kwargs={"pk": self.pk})
 
-    def num_editors_specialized(self):
+    def num_editors_specialized(self) -> int:
         return Redactor.objects.filter(newspapers__topic=self).count()
 
 
@@ -25,7 +25,9 @@ class Redactor(AbstractUser):
     MIN_YEARS = 0
     MAX_YEARS = 60
     years_of_experience = models.IntegerField(
-        validators=(MinValueValidator(MIN_YEARS), MaxValueValidator(MAX_YEARS)),
+        validators=(
+            MinValueValidator(MIN_YEARS), MaxValueValidator(MAX_YEARS)
+        ),
         null=True,
     )
 
@@ -33,10 +35,10 @@ class Redactor(AbstractUser):
         verbose_name = "publisher"
         verbose_name_plural = "publishers"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.username} ({self.first_name} {self.last_name})"
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse("tracker:redactor-detail", kwargs={"pk": self.pk})
 
 
@@ -50,5 +52,5 @@ class Newspaper(models.Model):
     class Meta:
         default_related_name = "newspapers"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.content

@@ -1,10 +1,12 @@
+from typing import Any
+
 from django import template
 
 register = template.Library()
 
 
 @register.simple_tag
-def query_transform(request, **kwargs):
+def query_transform(request, **kwargs) -> Any:
     updated = request.GET.copy()
     for key, value in kwargs.items():
         if value is not None:
